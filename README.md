@@ -1,4 +1,4 @@
-# FLutter Login
+# Flutter Login
 
 A new Flutter project featuring a faked authentication interface to demonstrate validation.
 Implemented first with StatefulWidget, then refactored with the BLOC pattern.
