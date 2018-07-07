@@ -17,7 +17,8 @@ class LoginScreenState extends State<LoginScreen> {
           children: <Widget>[
             emailField(),
             passwordField(),
-            //submitButton(),
+            Container(margin: EdgeInsets.only(top: 25.0)),
+            submitButton(),
           ],
         ),
       ),
@@ -39,10 +40,15 @@ class LoginScreenState extends State<LoginScreen> {
         labelText: 'Password',
         hintText: 'Minimum 8 characters'
       ),
+      obscureText: false, // switch to true for dots in pw field
     );
   }
 
   Widget submitButton() {
-    return null;
+    return RaisedButton(
+      onPressed: () {},
+      color: Colors.blue,
+      child: Text('Submit'),
+    );
   }
 }
