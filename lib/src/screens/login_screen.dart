@@ -3,16 +3,18 @@ import 'package:flutter/material.dart';
 class LoginScreen extends StatefulWidget {
     @override
       State<StatefulWidget> createState() {
-        // TODO: implement createState
         return LoginScreenState();
       }
 }
 
 class LoginScreenState extends State<LoginScreen> {
+  final formKey = GlobalKey<FormState>();
+
   Widget build(context) {
     return Container(
       margin: EdgeInsets.all(20.0),
       child: Form(
+        key: formKey,
         child: Column(
           children: <Widget>[
             emailField(),
@@ -31,6 +33,15 @@ class LoginScreenState extends State<LoginScreen> {
        hintText: 'you@example.com',
       ),
       keyboardType: TextInputType.emailAddress,
+      validator: (value) {
+        if (!value.contains('@')) {
+          return 'Please enter a valid email';
+        }
+        return null;
+      },
+      onSaved: (value) {
+        print(value);
+      },
     );
   }
 
@@ -41,14 +52,27 @@ class LoginScreenState extends State<LoginScreen> {
         hintText: 'Minimum 8 characters'
       ),
       obscureText: false, // switch to true for dots in pw field
+      validator: (value) {
+        if (value.length < 8 ) {
+          return 'Password must be at least 8 characters';
+        }
+        return null;
+      },
+      onSaved: (value) {
+        print(value);
+      },
     );
   }
 
   Widget submitButton() {
     return RaisedButton(
-      onPressed: () {},
       color: Colors.blue,
       child: Text('Submit'),
+      onPressed: () {
+        if (formKey.currentState.validate()) {
+          formKey.currentState.save();
+        }
+      },
     );
   }
 }
